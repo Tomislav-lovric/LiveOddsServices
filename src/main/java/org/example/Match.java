@@ -11,10 +11,30 @@ public class Match {
      * Create new match between two teams with score 0 - 0
      */
     public Match(Team homeTeam, Team awayTeam) {
+        if (homeTeam.equals(awayTeam)) {
+            throw new IllegalArgumentException("One team can't play against itself");
+        }
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
         this.awayScore = 0;
+    }
+
+    public void updateScore(int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw  new IllegalArgumentException("Scores can't be negative numbers");
+        }
+
+        if (this.homeScore == homeScore && this.awayScore == awayScore) {
+            throw new IllegalArgumentException("Can't update match score with the same score");
+        }
+
+        if (this.homeScore > homeScore || this.awayScore > awayScore) {
+            throw new IllegalArgumentException("Can't rolleback scores");
+        }
+
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
     }
 
     public Team getHomeTeam() {
