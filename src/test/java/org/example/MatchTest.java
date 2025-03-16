@@ -28,6 +28,7 @@ class MatchTest {
         Match match = new Match(homeTeam, awayTeam);
 
         match.updateScore(3, 2);
+
         assertEquals(3, match.getHomeScore());
         assertEquals(2, match.getAwayScore());
     }
@@ -54,6 +55,7 @@ class MatchTest {
         Team homeTeam = new Team("Croatia");
         Team awayTeam = new Team("Germany");
         Match match = new Match(homeTeam, awayTeam);
+
         match.updateScore(2, 2);
 
         assertThrows(IllegalArgumentException.class, () -> match.updateScore(2, 2));
@@ -72,6 +74,7 @@ class MatchTest {
         Team homeTeam = new Team("Croatia");
         Team awayTeam = new Team("Germany");
         Match match = new Match(homeTeam, awayTeam);
+
         match.updateScore(2, 2);
 
         assertThrows(IllegalArgumentException.class, () -> match.updateScore(1, 2));
@@ -82,6 +85,7 @@ class MatchTest {
         Team homeTeam = new Team("Croatia");
         Team awayTeam = new Team("Germany");
         Match match = new Match(homeTeam, awayTeam);
+
         match.updateScore(2, 2);
 
         assertThrows(IllegalArgumentException.class, () -> match.updateScore(2, 1));
