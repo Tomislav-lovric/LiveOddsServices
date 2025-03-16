@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Scoreboard {
 
@@ -32,6 +33,22 @@ public class Scoreboard {
         }
 
         return summary;
+    }
+
+    public void updateScore(String homeTeamName, int homeScore, String awayTeamName, int awayScore) {
+        Match match = findMatch(homeTeamName, awayTeamName);
+        match.updateScore(homeScore, awayScore);
+    }
+
+    public Match findMatch(String homeTeamName, String awayTeamName) {
+        for (Match match : matches) {
+            if (match.getHomeTeam().getName().equalsIgnoreCase(homeTeamName) &&
+                    match.getAwayTeam().getName().equalsIgnoreCase(awayTeamName)) {
+                return match;
+            }
+        }
+
+        throw new NoSuchElementException("Match not found");
     }
 
 }
