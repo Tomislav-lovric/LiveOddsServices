@@ -84,4 +84,22 @@ class ScoreboardTest {
         assertEquals("England 3 - Austria 1", scoreboard.getSummary().get(1));
     }
 
+    @Test
+    void testFinishMatchCorrectly() {
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.startMatch("Croatia", "Germany");
+
+        assertEquals("Croatia 0 - Germany 0 Finished", scoreboard.finishMatch("Croatia", "Germany"));
+        assertThrows(NoSuchElementException.class, () -> scoreboard.findMatch("Croatia", "Germany"));
+    }
+
+    @Test
+    void testUpdateScoreOfFinishedMatchShouldThrowNoSuchElementException() {
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.startMatch("Croatia", "Germany");
+        scoreboard.finishMatch("Croatia", "Germany");
+
+        assertThrows(NoSuchElementException.class, () -> scoreboard.updateScore("Croatia", 1, "Germany", 0));
+    }
+
 }
